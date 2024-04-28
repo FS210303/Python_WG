@@ -27,7 +27,7 @@ def format_amount_number(amount: float) -> str:
     if amount == int(amount):
         return str(int(amount))
     else:
-        return str(amount)
+        return str(round(amount,2))
 
 
 def create_ingredients_dataframe(people_count: int, recipe: list) -> pd.DataFrame:
