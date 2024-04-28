@@ -24,10 +24,11 @@ def get_recipes(ingredients: list) -> dict:
         recipes_data = "Something went wrong."
 
 def format_amount_number(amount: float) -> str:
+    amount = round(amount,2)
     if amount == int(amount):
         return str(int(amount))
     else:
-        return str(round(amount,2))
+        return str(amount)
 
 
 def create_ingredients_dataframe(people_count: int, recipe: list) -> pd.DataFrame:
