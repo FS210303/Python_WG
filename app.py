@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 
 
-API_KEY = os.getenv("API_KEY")
+API_KEY = os.getenv("38383701bda9437486582fa552663a1a")
 API_BASE_URL = "https://api.spoonacular.com"
 
 
