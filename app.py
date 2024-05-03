@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 
 
-API_KEY = os.getenv("38383701bda9437486582fa552663a1a")
+API_KEY = os.getenv("API_KEY")
 API_BASE_URL = "https://api.spoonacular.com"
 
 
@@ -22,6 +22,7 @@ def get_recipes(ingredients: list) -> dict:
         recipes_data = response.json()
     else:
         recipes_data = "Something went wrong."
+
 
 def format_amount_number(amount: float) -> str:
     amount = round(amount,2)
@@ -79,19 +80,19 @@ for recipe in recipes_data:
             st.write("Ingredients used:")
             for ingredient in recipe["usedIngredients"]:
                 amount_str = format_amount_number(people_count*ingredient['amount'])
-                st.write(f"- {amount_str} {ingredient['originalName']}")
+                st.write(f"- {amount_str} {ingredient['unitLong']} {ingredient['originalName']}")
 
         if missed_ingredients:
             st.write("Missing ingredients:")
             for ingredient in recipe["missedIngredients"]:
                 amount_str = format_amount_number(people_count*ingredient['amount'])
-                st.write(f"- {amount_str} {ingredient['originalName']}")
+                st.write(f"- {amount_str} {ingredient['unitLong']} {ingredient['originalName']}")
 
         if unused_ingredients:
             st.write("Ingredients not used:")
             for ingredient in recipe["unusedIngredients"]:
                 amount_str = format_amount_number(people_count*ingredient['amount'])
-                st.write(f"- {amount_str} {ingredient['originalName']}")
+                st.write(f"- {amount_str} {ingredient['unitLong']} {ingredient['originalName']}")
 
     # Image area
     with col2:
