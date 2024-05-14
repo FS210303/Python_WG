@@ -1,3 +1,7 @@
+#Der vorliegende Code wurde mithilfe von ChatGPT generiert.
+
+#Hier werden die erforderlichen Bibliotheken importiert. os wird für Umgebungsvariablen verwendet, streamlit für die Erstellung der Webanwendung, pandas für die Datenmanipulation und requests für die API Anfragen.
+
 import os
 import streamlit as st
 import pandas as pd
@@ -7,6 +11,8 @@ import requests
 API_KEY = os.getenv("API_KEY")
 API_BASE_URL = "https://api.spoonacular.com"
 
+
+#get_recipes(ingredients: list) -> dict: Diese Funktion ruft Rezepte basierend auf den angegebenen Zutaten von der Spoonacular-API ab und gibt sie als Dictionary zurück.
 
 def get_recipes(ingredients: list) -> dict:
     # Use global variable as st.button onclick doesn't return data
@@ -23,6 +29,7 @@ def get_recipes(ingredients: list) -> dict:
     else:
         recipes_data = "Something went wrong."
 
+#format_amount_number(amount: float) -> str: Diese Funktion formatiert eine Mengenangabe als Zeichenkette und rundet sie auf zwei Dezimalstellen.
 
 def format_amount_number(amount: float) -> str:
     amount = round(amount,2)
@@ -31,6 +38,7 @@ def format_amount_number(amount: float) -> str:
     else:
         return str(amount)
 
+#create_ingredients_dataframe(people_count: int, recipe: list) -> pd.DataFrame: Diese Funktion erstellt ein Pandas DataFrame für ein Rezept, basierend auf der Anzahl der Personen und den Zutaten des Rezepts.
 
 def create_ingredients_dataframe(people_count: int, recipe: list) -> pd.DataFrame:
     # Create pandas dataframe for barchart
@@ -50,13 +58,15 @@ def create_ingredients_dataframe(people_count: int, recipe: list) -> pd.DataFram
 
 
 # Setup page
+#Hier wird die Konfiguration der Streamlit-Seite vorgenommen, einschließlich Titel und Symbol.
 st.set_page_config(page_title="Recipe Finder", page_icon="🍽️")
 st.title("Recipe Finder")
 st.write("""Discover delicious recipes based on the ingredients you have on
             hand! Simply enter your ingredients and find suitable recipes for
             your next meal.""")
 
-# Ingredients and people Input and search button
+# Zutaten, Eingabe und search button 
+#Hier werden Eingabefelder für die Anzahl der Personen und die Zutaten bereitgestellt, sowie ein Button, um Rezepte basierend auf den eingegebenen Zutaten zu suchen.
 st.subheader("Input Ingredients separated by comma")
 people_count = st.number_input("Number of people", min_value=1, max_value=100, step=1, value=1)
 ingredients = st.text_input("Ingredients", placeholder="Flour, eggs, ...")
@@ -65,6 +75,7 @@ st.button("Search Recipes", on_click=get_recipes(ingredients))
 if recipes_data:
     st.subheader("Recipes")
 
+#Für jedes gefundene Rezept werden die Details angezeigt, einschliesslich der verwendeten Zutaten, fehlenden Zutaten und unverwendeten Zutaten.
 for recipe in recipes_data:
     used_ingredients = recipe["usedIngredients"]
     missed_ingredients = recipe["missedIngredients"]
@@ -73,6 +84,7 @@ for recipe in recipes_data:
     if used_ingredients or missed_ingredients or unused_ingredients:
         st.markdown(f"<h4>{recipe['title']}</h4>", unsafe_allow_html=True)
 
+#Die Benutzeroberfläche ist in zwei Spalten aufgeteilt: Die linke Spalte enthält die verwendeten und fehlenden Zutaten, während die rechte Spalte das Bild des Rezepts und ein Balkendiagramm mit den Zutaten anzeigt.
     # Ingredients area
     col1, col2 = st.columns([1, 2])
     with col1:
