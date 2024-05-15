@@ -21,10 +21,10 @@ def get_recipes(ingredients: list) -> dict:
     Returns:
         Rezepte als dict
     """
-    # Globale Variable als workaround, da st.button (on_click=get_recipes) nichts zurÃ¼ckgibt
+    # Globale Variable als workaround, da st.button (on_click=get_recipes) nichts zurückgibt
     global recipes_data
     recipes_data = []
-    # Aufbereitung der Zutaten als URL Paramter fÃ¼r den API Aufruf
+    # Aufbereitung der Zutaten als URL Paramter für den API Aufruf
     ingredient_list = ingredients.split(',')
     ingredients_url_parameters = ',+'.join(ingredient_list)
     # Rezepte von der 'findByIngredients' API abrufen
@@ -37,7 +37,7 @@ def get_recipes(ingredients: list) -> dict:
 
 
 def format_amount_number(amount: float) -> str:
-    """Rundet eine Gleitzahl auf zwei Dezimalstellen und gibt sie als String zurÃ¼ck
+    """Rundet eine Gleitzahl auf zwei Dezimalstellen und gibt sie als String zurück
 
     Args:
         amount: Gleitzahl, die gerundet werden soll
@@ -55,14 +55,14 @@ def format_amount_number(amount: float) -> str:
 
 
 def create_ingredients_dataframe(people_count: int, recipe: list) -> pd.DataFrame:
-    """Erstellt ein Dataframe fÃ¼r ein Rezept und der Anzahl der Personen
+    """Erstellt ein Dataframe für ein Rezept und der Anzahl der Personen
 
     Args:
         people_count: Anzahl Personen
         recipe: Rezept Liste von der Spoonacular API
 
     Returns:
-        Pandas Dataframe (Grundlage fÃ¼r Charts)
+        Pandas Dataframe (Grundlage für Charts)
 
     """
     data = {}
@@ -87,14 +87,14 @@ def create_ingredients_dataframe(people_count: int, recipe: list) -> pd.DataFram
 
 # Erstellung der Webapplikation
 
-# Konfiguration der Streamlit-App, einschlieÃŸlich Titel, Beschreibung und Favicon.
+# Konfiguration der Streamlit-App, einschliesslich Titel, Beschreibung und Favicon.
 st.set_page_config(page_title="Recipe Finder", page_icon="ðŸ½ï¸")
 st.title("Recipe Finder")
 st.write("""Discover delicious recipes based on the ingredients you have on
             hand! Simply enter your ingredients and find suitable recipes for
             your next meal.""")
 
-# Eingabefelder fÃ¼r die Anzahl der Personen und die Zutaten, sowie Searchbutton.
+# Eingabefelder für die Anzahl der Personen und die Zutaten, sowie Searchbutton.
 st.subheader("Input Ingredients separated by comma")
 people_count = st.number_input("Number of people", min_value=1, max_value=100, step=1, value=1)
 ingredients = st.text_input("Ingredients", placeholder="Flour, eggs, ...")
@@ -103,7 +103,7 @@ st.button("Search Recipes", on_click=get_recipes(ingredients))
 if recipes_data:
     st.subheader("Recipes")
 
-# FÃ¼r jedes gefundene Rezept werden die Details angezeigt, einschliesslich der
+# Für jedes gefundene Rezept werden die Details angezeigt, einschliesslich der
 # verwendeten Zutaten, fehlenden Zutaten und unverwendeten Zutaten.
 for recipe in recipes_data:
     used_ingredients = recipe["usedIngredients"]
@@ -113,9 +113,9 @@ for recipe in recipes_data:
     if used_ingredients or missed_ingredients or unused_ingredients:
         st.markdown(f"<h4>{recipe['title']}</h4>", unsafe_allow_html=True)
 
-    # Die BenutzeroberflÃ¤che ist in zwei Spalten aufgeteilt
+    # Die Benutzeroberfläche ist in zwei Spalten aufgeteilt
     col1, col2 = st.columns([1, 2])
-    # Linke Spalte enthÃ¤lt die verwendeten und fehlenden Zutaten
+    # Linke Spalte enthält die verwendeten und fehlenden Zutaten
     with col1:
         # Auflistung der verwendeten Zutaten
         if used_ingredients:
