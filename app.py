@@ -104,7 +104,7 @@ if recipes_data:
     st.subheader("Recipes")
 
 # Für jedes gefundene Rezept werden die Details angezeigt, einschliesslich der
-# verwendeten Zutaten, fehlenden Zutaten und unverwendeten Zutaten.
+# verwendeten Zutaten, fehlenden Zutaten und unverwendeten Zutaten. (*)
 for recipe in recipes_data:
     used_ingredients = recipe["usedIngredients"]
     missed_ingredients = recipe["missedIngredients"]
