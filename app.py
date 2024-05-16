@@ -1,4 +1,4 @@
-#Der vorliegende Code wurde mithilfe von ChatGPT generiert.
+#Teile des vorliegendes Codes wurden mit ChatGPT 4.0 als Hilfsmittel generiert.
 
 # Import der erforderlichen pip packages
 import os
