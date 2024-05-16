@@ -1,4 +1,4 @@
-#Teile des vorliegendes Codes wurden mit ChatGPT 4.0 als Hilfsmittel generiert.
+# Chat GPT wurde als Hilfsmittel für Teile des vorliegenden Codes benutzt. Dies ist mit einem (*) gekennzeichnet.
 
 # Import der erforderlichen pip packages
 import os
@@ -27,7 +27,7 @@ def get_recipes(ingredients: list) -> dict:
     # Aufbereitung der Zutaten als URL Paramter für den API Aufruf
     ingredient_list = ingredients.split(',')
     ingredients_url_parameters = ',+'.join(ingredient_list)
-    # Rezepte von der 'findByIngredients' API abrufen
+    # Rezepte von der 'findByIngredients' API abrufen (*)
     response = requests.get(f"{API_BASE_URL}/recipes/findByIngredients?apiKey={API_KEY}&ingredients={ingredients_url_parameters}")
     # Wenn HTTP Status OK (200) JSON Antwort in Dict umwandeln
     if response.status_code == 200:
@@ -87,7 +87,7 @@ def create_ingredients_dataframe(people_count: int, recipe: list) -> pd.DataFram
 
 # Erstellung der Webapplikation
 
-# Konfiguration der Streamlit-App, einschliesslich Titel, Beschreibung und Favicon.
+# Konfiguration der Streamlit-App, einschliesslich Titel, Beschreibung und Favicon. (*)
 st.set_page_config(page_title="Recipe Finder", page_icon="ðŸ½ï¸")
 st.title("Recipe Finder")
 st.write("""Discover delicious recipes based on the ingredients you have on
@@ -104,7 +104,7 @@ if recipes_data:
     st.subheader("Recipes")
 
 # Für jedes gefundene Rezept werden die Details angezeigt, einschliesslich der
-# verwendeten Zutaten, fehlenden Zutaten und unverwendeten Zutaten.
+# verwendeten Zutaten, fehlenden Zutaten und unverwendeten Zutaten. (*)
 for recipe in recipes_data:
     used_ingredients = recipe["usedIngredients"]
     missed_ingredients = recipe["missedIngredients"]
@@ -138,7 +138,7 @@ for recipe in recipes_data:
                 amount_str = format_amount_number(people_count*ingredient['amount'])
                 st.write(f"- {amount_str} {ingredient['unitLong']} {ingredient['originalName']}")
 
-    # Rechte Spalte zeigt das  Bild des Rezepts und ein Balkendiagramm mit den Zutaten.
+    # Rechte Spalte zeigt das  Bild des Rezepts und ein Balkendiagramm mit den Zutaten. (*)
     with col2:
         st.image(recipe["image"], caption=recipe["title"], use_column_width=True)
         st.bar_chart(create_ingredients_dataframe(people_count, recipe))
